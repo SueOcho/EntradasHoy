@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://estrenoshoyb.s3.amazonaws.com/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://estrenoshoyb.s3.amazonaws.com/css/slick.css">
+  <link rel="stylesheet" href="https://estrenoshoyb.s3.amazonaws.com/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://estrenoshoyb.s3.amazonaws.com/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/css/StyleJosue.css">
+
+  <title>Registro | Estrenos Hoy</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light p-0">
+      <a class="navbar-brand" href="/home/index.jsp">
+        <img src="https://estrenoshoyb.s3.amazonaws.com/images/logo.svg " alt=""><span>Solo estrenos</span>
+      </a>
+
+    </nav>
+  </header>
+
+
+  <!-- preloader -->
+  <div class="bkg_video">
+    <video autoplay loop>
+      <source src="https://estrenoshoyb.s3.amazonaws.com/images/blackwidow_banner-dest.webm">
+    </video>
+  </div>
+  <div class="content">
+    <form action="#" method="post" th:action="@{/admin/usuariosFront/save}" th:object="${usuario}" class="font-weight-bolder padded">
+
+      <!--Datos ocultos-->
+      <input type="hidden" class="form-control" id="estado" name="estado" th:field="*{estado}" >
+      <input type="hidden" class="form-control" id="fechaRegistro" name="fechaRegistro"   >
+      <input type="hidden"  id="idUsuario" name="idUsuario" th:field="*{id}" th:readonly="true">
+      <!-- fin de datos ocultos-->
+
+
+      <!-- mostrar titulo editando o agregando dependiendo de lo solicitado
+      -->
+      <div th:if="${usuario.id>0}">
+        <h3 lass="mb-3" th:text="'Editando a '+${usuario.nombre} + '  ' + ${usuario.apellido}"></h3>
+      </div>
+      <div th:if="${usuario.id<0}">
+        <h1 class="mb-3 text-center text-bolder font-weight-bold mb-5">Registrate</h1>
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" >
+      </div>
+      <div class="form-group">
+        <label for="apellido">Apellido:</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}">
+      </div>
+      <div class="form-group">
+        <label for="tipoDocumento">Tipo de Documento de Identidad:</label>
+        <select class="custom-select" name="tipoDocumento" id="tipoDocumento" th:field="*{tipoDocumento}">
+          <option th:value="1" th:text="DNI"></option>
+          <option th:value="0" th:text="CE"></option>
+        </select>
+      </div>
+      <div class="form-group">
+<!--
+        <label for="tipoUsuario">Tipo de usuario:</label>
+-->
+        <select type="hidden" class="custom-select" name="tipoUsuario" id="tipoUsuario" th:field="*{idTipoUsuario}" th:hidden="true">
+          <option th:each="tipoUsuario:${tipoUsuarios}"
+                  th:value="${tipoUsuario.idTipoUsuario}"
+                  th:text="${tipoUsuario.nombre}"
+                  th:selected="${tipoUsuario.idTipoUsuario}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="numeroDocumento">Documento de Identidad:</label>
+        <input type="text" class="form-control" id="numeroDocumento" name="numeroDocumento" th:field="*{numeroDocumento}">
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo electrónico:</label>
+        <input type="text" class="form-control" id="correo" name="correo" th:field="*{correo}">
+      </div>
+      <div class="form-group">
+        <label for="contrasena">Contraseña:</label>
+        <input type="text" class="form-control" id="contrasena" name="contrasena" th:field="*{contrasena}">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block mt-3 mb-1">Enviar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <p>
+            &copy; SOLO ESTRENOS.
+          </p>
+          <p>
+            All Rigths Reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://estrenoshoyb.s3.amazonaws.com/js/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://estrenoshoyb.s3.amazonaws.com/js/slick.min.js"></script>
+  <script src="https://estrenoshoyb.s3.amazonaws.com/js/popper.min.js"></script>
+  <script src="https://estrenoshoyb.s3.amazonaws.com/js/bootstrap.min.js"></script>
+  <script src="https://estrenoshoyb.s3.amazonaws.com/js/all.js"></script>
+</body>
+</html>
